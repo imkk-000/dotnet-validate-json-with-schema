@@ -12,7 +12,6 @@ namespace dotnet_validate_json_with_schema
     public class MyTests
     {
         [Fact]
-        [Obsolete]
         public void PersonIsJames()
         {
             string rawJsonPerson = @"{
@@ -24,8 +23,7 @@ namespace dotnet_validate_json_with_schema
             Assert.Equal("imkk-000", person.GetValue("name").ToObject<string>());
         }
 
-        [Obsolete]
-        public JsonSchema PersonSchema() => JsonSchema.Parse(@"{
+        public JSchema PersonSchema() => JSchema.Parse(@"{
             'properties': {
                 'name': { 'type': 'string' }
             }
@@ -33,7 +31,6 @@ namespace dotnet_validate_json_with_schema
     }
 
     public static class JObjectExtension {
-        [Obsolete]
-        public static bool Validate(this JObject jObj, Func<JsonSchema> schemaMethod) => jObj.IsValid(schemaMethod.Invoke());
+        public static bool Validate(this JObject jObj, Func<JSchema> schemaMethod) => jObj.IsValid(schemaMethod.Invoke());
     }
 }
